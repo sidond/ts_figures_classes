@@ -24,7 +24,7 @@ export class Triangle implements Figure {
     ) {
       throw new Error(
         'The sum of any two sides of a triangle must be greater than the ' +
-          +'third side',
+          'third side',
       );
     }
   }
@@ -52,11 +52,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    if (Number.isInteger(this.radius)) {
-      return Math.floor(area * 100) / 100;
-    }
-
-    return parseFloat(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -65,24 +61,21 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    if (this.a <= 0 || this.b <= 0) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('Sides of a rectangle must be positive numbers');
     }
   }
 
   getArea(): number {
-    const area = this.a * this.b;
+    const area = this.width * this.height;
 
     return parseFloat(area.toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area =
-    figure.getArea() % 1 === 0 ? figure.getArea() : figure.getArea().toFixed(2);
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
